@@ -1,15 +1,10 @@
 <html>
 <head>
 <style>
-textarea{height:50%; width:100%;}
-.typing { /* Style for typing animation */
-  border-right: .15em solid rgba(0,0,0,.3);
-  animation: typing 0.7s steps(40, end) infinite;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+textarea {
+    height: 50%; 
+    width: 100%; 
+    font-family: monospace; /* To make the typewriter effect look more natural */
 }
 </style>
 </head>
@@ -20,55 +15,52 @@ textarea{height:50%; width:100%;}
 <span>input:</span>
 <input type="text" id="input" value="Capital of India?">
 <button id="button">send</button>
-<textarea id="output" class="typing"></textarea>
+<textarea id="output"></textarea>
 
-
-  <script type="importmap">
-  {
-    "imports": {
-      "@google/generative-ai": "https://esm.run/@google/generative-ai"
-    }
-  }
+<script type="importmap">
+{
+    "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+    }
+}
 </script>
-  <script type="module">
-      import { GoogleGenerativeAI } from "@google/generative-ai";
+<script type="module">
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-      // Fetch your API_KEY
-      const API_KEY = document.getElementById("key").value;
+// Fetch your API_KEY
+const API_KEY = document.getElementById("key").value;
 
-      // Access your API key (see "Set up your API key" above)
-      const genAI = new GoogleGenerativeAI(API_KEY);
+// Access your API key (see "Set up your API key" above)
+const genAI = new GoogleGenerativeAI(API_KEY);
 
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
 
-  // Function to display text with typing effect
-  function typeWriter(text, outputElement) {
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < text.length) {
-        outputElement.value += text.charAt(i);
-        i++;
-      } else {
-        clearInterval(interval);
-        outputElement.classList.remove("typing");  // Remove typing animation
-      }
-    }, 50); // Adjust speed here (milliseconds)
-  }
-
-  async function run() {
+async function run() {
     const prompt = document.getElementById("input").value;
+
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const text = response.text();
-    const outputElement = document.getElementById("output");
+    const text = await response.text();
+    typeText(text);
+}
 
-    // Clear previous content and add typing effect
-    outputElement.value = "";
-    outputElement.classList.add("typing");  // Add typing animation
-    typeWriter(text, outputElement);
-  }
+function typeText(text) {
+    const textarea = document.getElementById("output");
+    textarea.value = ""; // Clear the textarea before typing begins
+    let i = 0;
+    
+    function type() {
+        if (i < text.length) {
+            textarea.value += text.charAt(i);
+            i++;
+            setTimeout(type, 50); // Adjust typing speed here (milliseconds)
+        }
+    }
+    
+    type();
+}
 
-document.getElementById("button").addEventListener("click",run);
-  </script>
+document.getElementById("button").addEventListener("click", run);
+</script>
 </body>
 </html>
