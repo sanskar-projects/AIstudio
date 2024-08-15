@@ -1,9 +1,19 @@
 <html>
+<head>
+<style>
+textarea{height:50%; width:100%;}
+</style>
+</head>
 <body>
-  <h1>hello</h1>
-  <input type="text" id="key" value="AIzaSyClI-tFps0ShMs-Bel6FP4c49l3VmnGG4w">
-  <input type="text" id="input" value="Capital of India?">
-  <button id="button">run</button>
+<h1>hello</h1>
+<span>API key:</span>
+<input type="text" id="key" value="AIzaSyClI-tFps0ShMs-Bel6FP4c49l3VmnGG4w"><br>
+<span>input:</span>
+<input type="text" id="input" value="Capital of India?"><br>
+<button id="button">send</button>
+<textarea id="output"></textarea>
+
+
   <script type="importmap">
   {
     "imports": {
@@ -27,7 +37,7 @@
   const result = await model.generateContent(prompt);
   const response = await result.response;
   const text = response.text();
-  alert(text);
+  document.getElementById("output").value=text;
 }
 
 document.getElementById("button").addEventListener("click",run);
