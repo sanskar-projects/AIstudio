@@ -1,1 +1,36 @@
+<html>
+<body>
+  <h1>hello</h1>
+  <input type="text" id="key" value="AIzaSyClI-tFps0ShMs-Bel6FP4c49l3VmnGG4w">
+  <input type="text" id="input" value="Capital of India?">
+  <button id="button">run</button>
+  <script type="importmap">
+  {
+    "imports": {
+      "@google/generative-ai": "https://esm.run/@google/generative-ai"
+    }
+  }
+</script>
+  <script type="module">
+      import { GoogleGenerativeAI } from "@google/generative-ai";
 
+      // Fetch your API_KEY
+      const API_KEY = document.getElementById("key").value;
+
+      // Access your API key (see "Set up your API key" above)
+      const genAI = new GoogleGenerativeAI(API_KEY);
+
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+    async function run() {
+  const prompt = document.getElementById("input").value;
+
+  const result = await model.generateContent(prompt);
+  const response = await result.response;
+  const text = response.text();
+  alert(text);
+}
+
+document.getElementById("button").addEventListener("click",run);
+  </script>
+</body>
+</html>
