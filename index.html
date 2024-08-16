@@ -1,17 +1,22 @@
 <html>
 <head>
 <style>
-textarea{height:50%; width:100%;}
+body{background-color:black;}
+h1,span{color:white;}
 </style>
 </head>
 <body>
 <h1>hello</h1>
+<fieldset>
+<button id="del" style="float:right; height:60px;">clear</button>
 <span>API key:</span>
-<input type="text" id="key" value="AIzaSyClI-tFps0ShMs-Bel6FP4c49l3VmnGG4w"><br>
+<input type="text" id="key" value="AIzaSyClI-tFps0ShMs-Bel6FP4c49l3VmnGG4w">
+<a href="https://aistudio.google.com/app/apikey">Get API key</a><br><br>
 <span>Ask:</span>
 <input type="text" id="input" value="Capital of India?">
-<button id="button">send</button><br>
-<textarea id="output"></textarea>
+<button id="button">send</button>
+</fieldset><br>
+<span id="output"></span>
 
   <script type="importmap">
   {
@@ -21,6 +26,8 @@ textarea{height:50%; width:100%;}
   }
 </script>
   <script type="module">
+var i;
+var text;
       import { GoogleGenerativeAI } from "@google/generative-ai";
 
       // Fetch your API_KEY
@@ -31,15 +38,32 @@ textarea{height:50%; width:100%;}
 
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
     async function run() {
+  
   const prompt = document.getElementById("input").value;
 
   const result = await model.generateContent(prompt);
   const response = await result.response;
-  const text = response.text();
-  document.getElementById("output").value=text;
+  text = response.text();
+  i=0;
+  document.getElementById("output").innerHTML+="Request: "+prompt+"<br>Response: ";
+  typewriter();
 }
-
+function typewriter()
+{
+if(i<text.length)
+{
+document.getElementById("output").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typewriter,1);
+}
+else{document.getElementById("output").innerHTML+="<hr>";}
+}
+function del()
+{
+document.getElementById("output").innerHTML="";
+}
 document.getElementById("button").addEventListener("click",run);
-  </script>
+document.getElementById("del").addEventListener("click",del);
+</script>
 </body>
 </html>
