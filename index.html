@@ -14,7 +14,7 @@ textarea{width:100%; height:75%;}
 <a href="https://aistudio.google.com/app/apikey">Get API key</a><br><br>
 <span>Ask:</span>
 <input type="text" id="input" value="Capital of India?">
-<button id="button">send</button><br>
+<button id="button">send</button><br><br>
 <textarea id="output"></textarea>
 
   <script type="importmap">
@@ -55,10 +55,8 @@ var o=document.getElementById("output");
 o.value+=text.charAt(i);
 o.scrollTop=o.scrollHeight;
 i++;
-
 setTimeout(typewriter,1);
 }
-else{document.getElementById("output").value+="**************************************************";}
 }
 function del()
 {
