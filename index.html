@@ -37,7 +37,8 @@ var text;
 
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
     async function run() {
-  
+  try
+  {
   const prompt = document.getElementById("input").value;
 
   const result = await model.generateContent(prompt);
@@ -46,6 +47,8 @@ var text;
   i=0;
   document.getElementById("output").value+="\nRequest: "+prompt+"\nResponse: ";
   typewriter();
+  }
+  catch(e){alert("CONNECTION FAILED\n"+e.message);}
 }
 function typewriter()
 {
