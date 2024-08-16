@@ -45,18 +45,21 @@ var text;
   const response = await result.response;
   text = response.text();
   i=0;
-  document.getElementById("output").innerHTML+="Request: "+prompt+"<br>Response: ";
+  document.getElementById("output").value+="\nRequest: "+prompt+"\nResponse: ";
   typewriter();
 }
 function typewriter()
 {
 if(i<text.length)
 {
-document.getElementById("output").innerHTML+=text.charAt(i);
+var o=document.getElementById("output");
+o.value+=text.charAt(i);
+o.scrollTop=o.scrollHeight;
 i++;
+
 setTimeout(typewriter,1);
 }
-else{document.getElementById("output").innerHTML+="<hr>";}
+else{document.getElementById("output").value+="**************************************************";}
 }
 function del()
 {
