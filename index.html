@@ -1,7 +1,7 @@
 <html>
 <head>
 <style>
-textarea{width:100%; height:75%;}
+textarea{width:100%;}
 </style>
 </head>
 <body>
@@ -9,11 +9,12 @@ textarea{width:100%; height:75%;}
 <span>API key:</span>
 <input type="text" id="key" value="AIzaSyClI-tFps0ShMs-Bel6FP4c49l3VmnGG4w">
 <a href="https://aistudio.google.com/app/apikey">Get API key</a><br><br>
-<span>Ask Meta AI anything:</span>
-<input id="input" value="Capital of India?">
+<span>INPUT:</span><br>
+<textarea id="input" value="Capital of India?"></textarea><br>
 <button id="button">send</button>
 <button id="del">clear</button><br><br>
-<textarea id="output"><h1>OUTPUT TERMINAL</h1></textarea>
+<span>OUTPUT:</span><br>
+<textarea id="output" style="height:75%;"></textarea>
 
   <script type="importmap">
   {
