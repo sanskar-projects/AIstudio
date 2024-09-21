@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <script>
+      function speak() {
+  // Create a SpeechSynthesisUtterance
+  const utterance = new SpeechSynthesisUtterance("Welcome to the game!");
+
+  // Select a voice
+  const voices = speechSynthesis.getVoices();
+  utterance.voice = voices[0]; // Choose a specific voice
+
+  // Speak the text
+  speechSynthesis.speak(utterance);
+}
+    </script>
+  </head>
   <body>
-  <script>
-const message = new SpeechSynthesisUtterance();
-
-// set the text to be spoken
-message.text = "Hello World!";
-
-// create an instance of the speech synthesis object
-const speechSynthesis = window.speechSynthesis;
-
-// start speaking
-speechSynthesis.speak(message);
-</script>
-</body>
+    <main>
+      <h1>Text To Speech</h1>
+      <button onclick="speak()">Speak</button>
+    </main>
+  </body>
 </html>
