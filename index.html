@@ -51,7 +51,8 @@ var text;
   document.getElementById("output").value+="\nRequest: "+prompt+"\nResponse: ";
   typewriter();
   }
-  catch(e){alert("CONNECTION FAILED");}
+  catch(e)
+  {alert("CONNECTION ERROR!It may be caused by any one of the following reasons,\n•You have entered an invalid API key\n•Your device is disconnected from the internet");}
 }
 function typewriter()
 {
