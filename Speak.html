@@ -4,7 +4,7 @@
     <script>
       function speak() {
   // Create a SpeechSynthesisUtterance
-  const utterance = new SpeechSynthesisUtterance("Welcome to the game!");
+  const utterance = new SpeechSynthesisUtterance(document.getElementById("x").value);
 
   // Select a voice
   const voices = speechSynthesis.getVoices();
@@ -19,6 +19,7 @@
     <main>
       <h1>Text To Speech</h1>
       <button onclick="speak()">Speak</button>
+<textarea id="x"></textarea>
     </main>
   </body>
 </html>
